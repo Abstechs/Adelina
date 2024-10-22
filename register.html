@@ -107,6 +107,9 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Initialize Bootstrap Popovers
@@ -118,6 +121,77 @@
                 });
             });
         });
+        
+        
+$(document).ready(function () {
+    $('#registerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const name = $('#name').val().trim();
+        const email = $('#email').val().trim();
+        const password = $('#password').val().trim();
+        const confirmPassword = $('#confirm-password').val().trim();
+
+        // Check if user already exists in cookies
+        if (Cookies.get('user.name') === email) {
+            iziToast.error({
+                title: 'Error',
+                message: 'User already exists. Kindly login to continue!',
+                position: 'topRight',
+            });
+            return;
+        }
+
+        // Validate input fields
+        if (name === "" || email === "" || password === "" || confirmPassword === "") {
+            iziToast.error({
+                title: 'Error',
+                message: 'All fields are required!',
+                position: 'topRight',
+            });
+        } else if (!validateEmail(email)) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Please enter a valid email address!',
+                position: 'topRight',
+            });
+        } else if (password !== confirmPassword) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Passwords do not match!',
+                position: 'topRight',
+            });
+        } else {
+            // Store user details in session and cookies
+            sessionStorage.setItem('user.name', email);
+            sessionStorage.setItem('user.password', password);
+            Cookies.set('user.name', email, { expires: 7 }); // Cookie expires in 7 days
+            Cookies.set('user.password', password, { expires: 7 }); // Cookie expires in 7 days
+
+            iziToast.success({
+                title: 'Success',
+                message: 'Registration successful! You can now login.',
+                position: 'topRight',
+            });
+
+            // Redirect to login.html after 4 seconds
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 4000);
+
+            // Clear input fields after successful registration
+            $('#name').val('');
+            $('#email').val('');
+            $('#password').val('');
+            $('#confirm-password').val('');
+        }
+    });
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
+});
     </script>
 </body>
 </html>
