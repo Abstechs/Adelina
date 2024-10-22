@@ -34,6 +34,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
 </head>
 <body class="bg-gray-100">
     <!-- Header -->
@@ -50,8 +51,8 @@
                 <div class="relative group">
                     <button class="flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-full transition duration-300 hover:bg-blue-700" 
                             data-bs-toggle="popover" title="Profile" data-bs-content="
-                            <a href='./home' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Home</a>
-                            <a href='/login' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Sign in</a>
+                            <a href='./home.html' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Home</a>
+                            <a href='/login.html' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Sign in</a>
                             " data-html="true">
                         <i class="fas fa-user text-lg"></i>
                     </button>
@@ -59,8 +60,8 @@
                 
                 <button class="md:hidden flex items-center justify-center w-10 h-10 border border-transparent rounded-full text-white hover:bg-blue-700 focus:outline-none" 
                         data-bs-toggle="popover" title="Menu" data-bs-content="
-                        <a href='./home' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Home</a>
-                        <a href='./login' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Sign in</a>
+                        <a href='./home.html' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Home</a>
+                        <a href='./login.html' class='block px-4 py-2 text-gray-700 hover:bg-gray-100'>Sign in</a>
                         " data-html="true">
                     <i class="fas fa-bars text-lg"></i>
                 </button>
@@ -71,7 +72,7 @@
     <!-- Registration Form -->
     <div class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
         <h1 class="text-3xl font-bold text-gray-800 mb-4">Create an Account</h1>
-        <form action="#" method="POST">
+        <form action="#" id="registerForm" method="POST">
             <div class="mb-4">
                 <label for="name" class="block text-gray-700">Full Name</label>
                 <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-300" placeholder="Enter your full name">
