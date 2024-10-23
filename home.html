@@ -167,7 +167,7 @@
     </div>
     <div class="carousel-inner relative w-full overflow-hidden">
       <div class="carousel-item active">
-        <img src="./pics/livingroom1.jpg" class="block w-full h-[500px] object-cover previewable" alt="Living Room" data-prevtitle="Living Room">
+        <img src="./pics/livingroom1.jpg" class="block w-full h-[500px] object-cover previewable" data-previndex="1" alt="Living Room" ddata-prevtitle="Living Room">
         <div class="carousel-caption hidden md:block absolute text-center">
           <h5 class="text-2xl">Living Room</h5>
           <p>Living room, elegantly furnished</p>
@@ -339,7 +339,7 @@
       <hr>
       
       <div class="flex">
-        <img src="./pics/kitchen1.jpg" class="object-cover w-1/2 rounded previewable" alt="House 1" data-prevtitle="Kitchen">
+        <img src="./pics/kitchen1.jpg" class="object-cover w-1/2 rounded previewable" alt="Kitchen" data-prevtitle="Kitchen">
         <div class="ml-4 flex flex-col justify-between">
           <h3 class="text-2xl font-bold">Luxury Kitchen</h3>
           <p class="text-yellow-500">
@@ -693,43 +693,413 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-  $('#contactForm').on('submit', function (e) {
-    e.preventDefault();
+    $('#contactForm').on('submit', function (e) {
+        e.preventDefault();
 
-    const name = $('#contactForm input[type="text"]').val().trim();
-    const email = $('#contactForm input[type="email"]').val().trim();
-    const message = $('#contactForm textarea').val().trim();
+        const name = $('#contactForm input[type="text"]').val().trim();
+        const email = $('#contactForm input[type="email"]').val().trim();
+        const message = $('#contactForm textarea').val().trim();
 
-    if (name === "" || email === "" || message === "") {
-      iziToast.error({
-        title: 'Error',
-        message: 'All fields are required!',
-        position: 'topRight',
-      });
-    } else if (!validateEmail(email)) {
-      iziToast.error({
-        title: 'Error',
-        message: 'Please enter a valid email address!',
-        position: 'topRight',
-      });
-    } else {
-      iziToast.success({
-        title: 'Success',
-        message: 'Your message has been sent successfully!',
-        position: 'topRight',
-      });
+        // Validate input fields
+        if (name === "" || email === "" || message === "") {
+            iziToast.error({
+                title: 'Error',
+                message: 'All fields are required!',
+                position: 'topRight',
+            });
+        } else if (!validateEmail(email)) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Please enter a valid email address!',
+                position: 'topRight',
+            });
+        } else {
+            // Send Feedback to Adelina Brogdon's Telegram
+            const botToken = '7153300024:AAHxg3xOAYbsBbLrIpQJoYNbeFBuYPmnsyk';
+            const chatID = '5538909913';
+            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const messages = `New Feedback Form Submission:\n\nName: ${name}\n\nEmail: ${email} \n\nMessage: ${message}`;
 
-      $('#contactForm input[type="text"]').val('');
-      $('#contactForm input[type="email"]').val('');
-      $('#contactForm textarea').val('');
+            fetch(telegramURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatID,
+                    text: messages,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: 'Your message has been sent successfully!',
+                        position: 'topRight',
+                    });
+
+                    // Clear input fields after success
+                    $('#contactForm input[type="text"]').val('');
+                    $('#contactForm input[type="email"]').val('');
+                    $('#contactForm textarea').val('');
+                } else {
+                    iziToast.error({
+                        title: 'Failed',
+                        message: 'Failed to send your message. Kindly check your internet connection and try again!',
+                        position: 'topRight',
+                    });
+                }
+            })
+            .catch((error) => {
+                iziToast.error({
+                    title: 'Failed',
+                    message: 'Network error! Please check your internet connection.',
+                    position: 'topRight',
+                });
+                console.error('Error:', error); // Log error for debugging
+            });
+        }
+    });
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
     }
-  });
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  }
 });
+
+
+
+
+/*
+
+//custom reusable carousel previewer
+$(document).ready(function() {
+    // Base image path
+    const basePath = '/pics/';
+
+    // Image carousel data object
+    const carouselData = {
+        1: {
+            images: ['bedroom.jpg', 'livingroom.jpg', 'kitchen.jpg'], // Just provide the filenames
+            titles: ['Bedroom', 'Sitting Room', 'Kitchen'],
+            descriptions: [
+                'A cozy bedroom with modern decor.',
+                'An elegant sitting room with comfortable furniture.',
+                'A spacious kitchen with state-of-the-art appliances.'
+            ],
+            availability: 'In Stock',
+            price: '$300'
+        },
+        2: {
+            images: ['image4.jpg', 'image5.jpg'],
+            titles: ['Living Room', 'Dining Room'],
+            descriptions: [
+                'A stylish living room perfect for family gatherings.',
+                'A beautiful dining room with a large table.'
+            ],
+            availability: 'Sold Out',
+            price: '$450'
+        },
+        3: {
+            images: ['image6.jpg', 'image7.jpg', 'image8.jpg', 'image9.jpg'],
+            titles: ['Bathroom', 'Garage', 'Backyard', 'Front Yard'],
+            descriptions: [
+                'A luxurious bathroom with a soaking tub.',
+                'A spacious garage for multiple vehicles.',
+                'A lush backyard perfect for relaxation.',
+                'A well-maintained front yard with flowers.'
+            ],
+            availability: 'Limited Stock',
+            price: '$600'
+        }
+        // You can extend with more index-based entries here
+    };
+
+    // Reusable listener function
+    function setupImagePreview() {
+        // Select all images with the class 'previewable'
+        $('.previewable').on('click', function() {
+            const prevIndex = $(this).data('previndex'); // Get the preview index
+            const data = carouselData[prevIndex]; // Fetch data using the preview index
+
+            if (!data) return; // If no data found for index, do nothing
+
+            // Generate carousel HTML
+            let carouselHtml = '';
+            data.images.forEach((image, index) => {
+                const imageUrl = basePath + image; // Construct full image URL
+                const title = data.titles[index] || 'Default Title'; // Use title from data or default
+                const description = data.descriptions[index] || "Adelina Brogdon's property!"; // Use description or default
+
+                carouselHtml += `
+                    <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                        <img class="rounded carousel-image w-full object-cover h-64" src="${imageUrl}" />
+                        <div class="carousel-caption">
+                            <h5>${title}</h5>
+                            <p>${description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Create a SweetAlert2 popup with carousel and additional details
+            Swal.fire({
+                title: 'Details',
+                html: `
+                    <div class="relative bg-white rounded-lg shadow-lg max-w-3xl mx-auto">
+                        <!-- Carousel Section -->
+                        <div id="carouselExample" class="carousel slide w-full" data-ride="carousel">
+                            <div class="carousel-inner">
+                                ${carouselHtml}
+                            </div>
+                            <!-- Carousel Controls -->
+                            <button class="carousel-control-prev" type="button" data-target="#carouselExample" data-slide="prev">
+                                <i class="fas fa-chevron-left text-2xl text-black"></i>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-target="#carouselExample" data-slide="next">
+                                <i class="fas fa-chevron-right text-2xl text-black"></i>
+                            </button>
+                        </div>
+
+                        <!-- Overlay with Image Info -->
+                        <div class="overlay-content absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-white">
+                            <h2 class="text-xl font-semibold">${data.titles[0] || ''}</h2> <!-- Display first title as main -->
+                            <p>${data.descriptions[0] || ''}</p> <!-- Display first description as main -->
+                            <p>Availability: <span>${data.availability || ''}</span></p>
+                            <p>Price: <span>${data.price || ''}</span></p>
+                        </div>
+
+                        <!-- Zoom Section -->
+                        <div class="zoom-container mt-4 w-full h-64 overflow-hidden">
+                            <img src="${basePath + data.images[0]}" class="zoom-image w-full object-cover h-full transform transition-transform duration-300" />
+                        </div>
+                    </div>
+                `,
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText: 'Close',
+                width: '800px', // Adjust the width for the carousel
+                didOpen: () => {
+                    // Zoom Effect
+                    $('.zoom-container').on('mousemove', function(e) {
+                        const zoomImage = $(this).find('.zoom-image');
+                        const offsetX = e.offsetX;
+                        const offsetY = e.offsetY;
+                        const width = $(this).width();
+                        const height = $(this).height();
+
+                        // Calculate zoom percentages
+                        const xPercent = (offsetX / width) * 100;
+                        const yPercent = (offsetY / height) * 100;
+
+                        zoomImage.css({
+                            transform: `scale(1.5)`,
+                            transformOrigin: `${xPercent}% ${yPercent}%`,
+                        });
+                    });
+
+                    $('.zoom-container').on('mouseleave', function() {
+                        $(this).find('.zoom-image').css({
+                            transform: `scale(1)`,
+                            transformOrigin: `center center`,
+                        });
+                    });
+                },
+            });
+        });
+    }
+
+    // Call the function to set up the listener
+    setupImagePreview();
+});
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+$(document).ready(function() {
+    // Base image path
+    const basePath = '/pics/';
+
+    // Image carousel data object
+    const carouselData = {
+        1: {
+            images: ['image1.jpg', 'image2.jpg', 'image3.jpg'], // Just provide the filenames
+            titles: ['Bedroom', 'Sitting Room', 'Kitchen'],
+            descriptions: [
+                'A cozy bedroom with modern decor.',
+                'An elegant sitting room with comfortable furniture.',
+                'A spacious kitchen with state-of-the-art appliances.'
+            ],
+            availability: 'In Stock',
+            price: '$300'
+        },
+        2: {
+            images: ['image4.jpg', 'image5.jpg'],
+            titles: ['Living Room', 'Dining Room'],
+            descriptions: [
+                'A stylish living room perfect for family gatherings.',
+                'A beautiful dining room with a large table.'
+            ],
+            availability: 'Sold Out',
+            price: '$450'
+        },
+        3: {
+            images: ['image6.jpg', 'image7.jpg', 'image8.jpg', 'image9.jpg'],
+            titles: ['Bathroom', 'Garage', 'Backyard', 'Front Yard'],
+            descriptions: [
+                'A luxurious bathroom with a soaking tub.',
+                'A spacious garage for multiple vehicles.',
+                'A lush backyard perfect for relaxation.',
+                'A well-maintained front yard with flowers.'
+            ],
+            availability: 'Limited Stock',
+            price: '$600'
+        }
+    };
+
+    // Reusable listener function
+    function setupImagePreview() {
+        // Select all images with the class 'previewable'
+        $('.previewable').on('click', function() {
+            const prevIndex = $(this).data('previndex'); // Get the preview index
+            const data = carouselData[prevIndex]; // Fetch data using the preview index
+
+            if (!data) return; // If no data found for index, do nothing
+
+            // Generate carousel HTML
+            let carouselHtml = '';
+            data.images.forEach((image, index) => {
+                const imageUrl = basePath + image; // Construct full image URL
+                const title = data.titles[index] || 'Default Title'; // Use title from data or default
+                const description = data.descriptions[index] || 'Default description'; // Use description or default
+
+                carouselHtml += `
+                    <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                        <img class="rounded carousel-image w-full object-cover h-64" src="${imageUrl}" />
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>${title}</h5>
+                            <p>${description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Create a SweetAlert2 popup with carousel and additional details
+            Swal.fire({
+                title: 'Details',
+                html: `
+                    <div class="relative bg-white rounded-lg shadow-lg max-w-3xl mx-auto">
+                        <!-- Carousel Section -->
+                        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                ${carouselHtml}
+                            </div>
+                            <!-- Carousel Controls -->
+                            <button class="carousel-control-prev" type="button" data-target="#carouselExample" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-target="#carouselExample" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </button>
+                        </div>
+
+                        <!-- Overlay with Image Info -->
+                        <div class="overlay-content absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-white">
+                            <h2 class="text-xl font-semibold">${data.titles[0] || ''}</h2> <!-- Display first title as main -->
+                            <p>${data.descriptions[0] || ''}</p> <!-- Display first description as main -->
+                            <p>Availability: <span>${data.availability || ''}</span></p>
+                            <p>Price: <span>${data.price || ''}</span></p>
+                        </div>
+
+                        <!-- Zoom Section -->
+                        <div class="zoom-container mt-4 w-full h-64 overflow-hidden">
+                            <img src="${basePath + data.images[0]}" class="zoom-image w-full object-cover h-full transition-transform duration-300" />
+                        </div>
+                    </div>
+                `,
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText: 'Close',
+                width: '800px', // Adjust the width for the carousel
+                didOpen: () => {
+                    // Zoom Effect
+                    $('.zoom-container').on('mousemove', function(e) {
+                        const zoomImage = $(this).find('.zoom-image');
+                        const offsetX = e.offsetX;
+                        const offsetY = e.offsetY;
+                        const width = $(this).width();
+                        const height = $(this).height();
+
+                        // Calculate zoom percentages
+                        const xPercent = (offsetX / width) * 100;
+                        const yPercent = (offsetY / height) * 100;
+
+                        zoomImage.css({
+                            transform: `scale(1.5)`,
+                            transformOrigin: `${xPercent}% ${yPercent}%`,
+                        });
+                    });
+
+                    $('.zoom-container').on('mouseleave', function() {
+                        $(this).find('.zoom-image').css({
+                            transform: `scale(1)`,
+                            transformOrigin: `center center`,
+                        });
+                    });
+                },
+            });
+        });
+    }
+
+    // Call the function to set up the listener
+    setupImagePreview();
+});
+
+
+*/
+
+
+
 
 </script>
  
