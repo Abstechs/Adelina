@@ -715,13 +715,9 @@ $(document).ready(function () {
             });
         } else {
             // Send Feedback to Adelina Brogdon's Telegram
-            if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
-
-            const botToken = process.env.ADELINA_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
-            const chatID = '5538909913';
-            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            
+            import { botToken, chatID, telegramURL } from './pics/.js';
+            
             const messages = `New Feedback Form Submission:\n\nName: ${name}\n\nEmail: ${email} \n\nMessage: ${message}`;
 
             fetch(telegramURL, {

