@@ -121,28 +121,6 @@
   </div>
 </section>
 
-<!--  
-
-  <section class="container mx-auto mt-6 flex overflow-x-auto gap-2 no-scrollbar">
-  <div class="flex-shrink-0 flex items-center p-2 hover:bg-transparent hover:border-2 hover:border-blue-600 rounded-full transition-all duration-300 border-2 border-transparent">
-    <i class="fas fa-plane text-blue-600 text-xl"></i>
-    <p class="ml-1 text-md">Flights</p>
-  </div>
-  <div class="flex-shrink-0 flex items-center p-2 hover:bg-transparent hover:border-2 hover:border-blue-600 rounded-full transition-all duration-300 border-2 border-transparent">
-    <i class="fas fa-car text-blue-600 text-xl"></i>
-    <p class="ml-1 text-md">Car Rentals</p>
-  </div>
-  <div class="flex-shrink-0 flex items-center p-2 hover:bg-transparent hover:border-2 hover:border-blue-600 rounded-full transition-all duration-300 border-2 border-transparent">
-    <i class="fas fa-bed text-blue-600 text-xl"></i>
-    <p class="ml-1 text-md">Hotels</p>
-  </div>
-  <div class="flex-shrink-0 flex items-center p-2 hover:bg-transparent hover:border-2 hover:border-blue-600 rounded-full transition-all duration-300 border-2 border-transparent">
-    <i class="fas fa-umbrella-beach text-blue-600 text-xl"></i>
-    <p class="ml-1 text-md">Vacation</p>
-  </div>
-</section>
-
- -->
 
 
 <style>
@@ -158,7 +136,6 @@
 
 
 
-
   <div id="carouselExampleCaptions" class="carousel slide relative mt-6" data-bs-ride="carousel">
     <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -167,7 +144,7 @@
     </div>
     <div class="carousel-inner relative w-full overflow-hidden">
       <div class="carousel-item active">
-        <img src="./pics/livingroom1.jpg" class="block w-full h-[500px] object-cover previewable" data-previndex="1" alt="Living Room" ddata-prevtitle="Living Room">
+        <img src="./pics/livingroom1.jpg" class="block w-full h-[500px] object-cover previewable"  alt="Living Room" ddata-prevtitle="Living Room">
         <div class="carousel-caption hidden md:block absolute text-center">
           <h5 class="text-2xl">Living Room</h5>
           <p>Living room, elegantly furnished</p>
@@ -485,6 +462,42 @@
           <p class="text-red-500">Hurry! Last few rooms available!</p>
         </div>
       </div>
+      
+      <hr>
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+<!--  --><!--  --><!--  --><!-- --><!--  -->
+      <div class="flex">
+        <img src="./pics/hia.jpg" class="object-cover w-1/2 rounded prevme" alt="Staircase" data-prevtitle="Staircase" data-previndex="1" >
+        <div class="ml-4 flex flex-col justify-between">
+          <h3 class="text-2xl font-bold">Rental Apartment</h3>
+          <p class="text-yellow-500">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            7.1 Good . 298 reviews
+          </p>
+          <p class="text-gray-600">
+            <i class="fas fa-map-marker-alt"></i>
+            Los Angeles, CA, USA
+          </p>
+          <!-- 
+          <p class="text-green-600">$120 / night + taxes & charges</p>
+           -->
+          <p class="text-red-500">Only one room left!</p>
+        </div>
+      </div>
+      
+      <hr>
     </div>
   </section>
   
@@ -509,8 +522,7 @@
 
 
 
-<!--  
-// Newsletter Subscription Section 
+<!-- Newsletter Subscription Section 
 <section class="container mx-auto mt-12 p-6 bg-gray-100 rounded-lg shadow-md">
   <h2 class="text-2xl font-semibold mb-4">Subscribe to Our Newsletter</h2>
   <form>
@@ -770,7 +782,6 @@ const telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
 
 /*
-
 //custom reusable carousel previewer
 $(document).ready(function() {
     // Base image path
@@ -779,14 +790,14 @@ $(document).ready(function() {
     // Image carousel data object
     const carouselData = {
         1: {
-            images: ['bedroom.jpg', 'livingroom.jpg', 'kitchen.jpg'], // Just provide the filenames
+            images: ['hia.jpg', 'hib.jpg', 'hic.jpg'], // Just provide the filenames
             titles: ['Bedroom', 'Sitting Room', 'Kitchen'],
             descriptions: [
                 'A cozy bedroom with modern decor.',
                 'An elegant sitting room with comfortable furniture.',
                 'A spacious kitchen with state-of-the-art appliances.'
             ],
-            availability: 'In Stock',
+            availability: 'Available',
             price: '$300'
         },
         2: {
@@ -813,291 +824,124 @@ $(document).ready(function() {
         }
         // You can extend with more index-based entries here
     };
+    */
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+////////////////////////////////////////////
 
-    // Reusable listener function
-    function setupImagePreview() {
-        // Select all images with the class 'previewable'
-        $('.previewable').on('click', function() {
-            const prevIndex = $(this).data('previndex'); // Get the preview index
-            const data = carouselData[prevIndex]; // Fetch data using the preview index
+// Renamed imageData to carouselImageData to avoid conflicts
+const carouselImageData = {
+  1: {
+    'hia.jpg': { name: 'Bedroom', desc: 'A cozy bedroom with modern decor.' },
+    'hib.jpg': { name: 'image1', desc: 'img1 description' },
+    'hic.jpg': { name: 'image1', desc: 'img1 description' },
+  },
+  2: {
+    'hiia.jpg': { name: 'image2', desc: 'img2 description' },
+    'hiib.jpg': { name: 'image2', desc: 'img2 description' },
+  },
+};
 
-            if (!data) return; // If no data found for index, do nothing
+// Function to create SweetAlert modal with carousel
+function showCarousel(index) {
+  // Check if index exists in carouselImageData
+  if (!carouselImageData[index]) {
+    console.error(`No images found for index: ${index}`);
+    return;
+  }
 
-            // Generate carousel HTML
-            let carouselHtml = '';
-            data.images.forEach((image, index) => {
-                const imageUrl = basePath + image; // Construct full image URL
-                const title = data.titles[index] || 'Default Title'; // Use title from data or default
-                const description = data.descriptions[index] || "Adelina Brogdon's property!"; // Use description or default
+  // Generate a unique ID for the carousel
+  const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 
-                carouselHtml += `
-                    <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                        <img class="rounded carousel-image w-full object-cover h-64" src="${imageUrl}" />
-                        <div class="carousel-caption">
-                            <h5>${title}</h5>
-                            <p>${description}</p>
-                        </div>
-                    </div>
-                `;
-            });
+  // Build carousel items and ensure the first item is active
+  // Build carousel items and ensure the first item is active
+const carouselItems = Object.entries(carouselImageData[index]).map(([img, data], idx) => {
+  return `
+    <div class="carousel-item ${idx === 0 ? 'active' : ''}">
+      <img src="./pics/${img}" class="d-block w-100" alt="${data.name}">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="text-shadow">${data.name}</h5>
+        <p class="text-shadow">${data.desc}</p>
+      </div>
+      <div class="carousel-caption d-block d-md-none">
+        <h5 class="text-shadow">${data.name}</h5>
+        <p class="text-shadow">${data.desc}</p>
+      </div>
+    </div>
+  `;
+}).join('');
 
-            // Create a SweetAlert2 popup with carousel and additional details
-            Swal.fire({
-                title: 'Details',
-                html: `
-                    <div class="relative bg-white rounded-lg shadow-lg max-w-3xl mx-auto">
-                        <!-- Carousel Section -->
-                        <div id="carouselExample" class="carousel slide w-full" data-ride="carousel">
-                            <div class="carousel-inner">
-                                ${carouselHtml}
-                            </div>
-                            <!-- Carousel Controls -->
-                            <button class="carousel-control-prev" type="button" data-target="#carouselExample" data-slide="prev">
-                                <i class="fas fa-chevron-left text-2xl text-black"></i>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-target="#carouselExample" data-slide="next">
-                                <i class="fas fa-chevron-right text-2xl text-black"></i>
-                            </button>
-                        </div>
+// CSS for text shadow
+const style = document.createElement('style');
+style.innerHTML = `
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+    background: rgba(0,0,0,0.1);
+  }
+`;
+document.head.appendChild(style);
 
-                        <!-- Overlay with Image Info -->
-                        <div class="overlay-content absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-white">
-                            <h2 class="text-xl font-semibold">${data.titles[0] || ''}</h2> <!-- Display first title as main -->
-                            <p>${data.descriptions[0] || ''}</p> <!-- Display first description as main -->
-                            <p>Availability: <span>${data.availability || ''}</span></p>
-                            <p>Price: <span>${data.price || ''}</span></p>
-                        </div>
+  // SweetAlert modal setup
+  Swal.fire({
+    title: 'Apartment',
+    html: `
+      <div id="${carouselId}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+          ${carouselItems} 
+        </div>
+        <!-- Added data-target with dynamic carousel ID -->
+        <a class="carousel-control-prev" href="#${carouselId}" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#${carouselId}" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    `,
+    showCloseButton: true,
+    showCancelButton: false,
+    focusConfirm: false,
+    confirmButtonText: 'Close',
+    didOpen: () => {
+      // Activate carousel with auto-slide and working navigation buttons
+      $(`#${carouselId}`).carousel({
+        interval: 3000,   // Auto-slide every 3 seconds
+        ride: 'carousel', // Ensure auto-slide starts correctly
+        wrap: true        // Ensures carousel wraps around when it reaches the last item
+      });
 
-                        <!-- Zoom Section -->
-                        <div class="zoom-container mt-4 w-full h-64 overflow-hidden">
-                            <img src="${basePath + data.images[0]}" class="zoom-image w-full object-cover h-full transform transition-transform duration-300" />
-                        </div>
-                    </div>
-                `,
-                showCloseButton: true,
-                focusConfirm: false,
-                confirmButtonText: 'Close',
-                width: '800px', // Adjust the width for the carousel
-                didOpen: () => {
-                    // Zoom Effect
-                    $('.zoom-container').on('mousemove', function(e) {
-                        const zoomImage = $(this).find('.zoom-image');
-                        const offsetX = e.offsetX;
-                        const offsetY = e.offsetY;
-                        const width = $(this).width();
-                        const height = $(this).height();
+      // Ensure previous and next buttons work
+      $(`#${carouselId} .carousel-control-prev`).click(function () {
+        $(`#${carouselId}`).carousel('prev');
+      });
+      $(`#${carouselId} .carousel-control-next`).click(function () {
+        $(`#${carouselId}`).carousel('next');
+      });
+    },
+  });
+}
 
-                        // Calculate zoom percentages
-                        const xPercent = (offsetX / width) * 100;
-                        const yPercent = (offsetY / height) * 100;
-
-                        zoomImage.css({
-                            transform: `scale(1.5)`,
-                            transformOrigin: `${xPercent}% ${yPercent}%`,
-                        });
-                    });
-
-                    $('.zoom-container').on('mouseleave', function() {
-                        $(this).find('.zoom-image').css({
-                            transform: `scale(1)`,
-                            transformOrigin: `center center`,
-                        });
-                    });
-                },
-            });
-        });
-    }
-
-    // Call the function to set up the listener
-    setupImagePreview();
+// Event listener for elements with data-previndex
+$(document).on('click', '[data-previndex]', function () {
+  const index = $(this).data('previndex');
+  showCarousel(index);
 });
-
-
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-$(document).ready(function() {
-    // Base image path
-    const basePath = '/pics/';
-
-    // Image carousel data object
-    const carouselData = {
-        1: {
-            images: ['image1.jpg', 'image2.jpg', 'image3.jpg'], // Just provide the filenames
-            titles: ['Bedroom', 'Sitting Room', 'Kitchen'],
-            descriptions: [
-                'A cozy bedroom with modern decor.',
-                'An elegant sitting room with comfortable furniture.',
-                'A spacious kitchen with state-of-the-art appliances.'
-            ],
-            availability: 'In Stock',
-            price: '$300'
-        },
-        2: {
-            images: ['image4.jpg', 'image5.jpg'],
-            titles: ['Living Room', 'Dining Room'],
-            descriptions: [
-                'A stylish living room perfect for family gatherings.',
-                'A beautiful dining room with a large table.'
-            ],
-            availability: 'Sold Out',
-            price: '$450'
-        },
-        3: {
-            images: ['image6.jpg', 'image7.jpg', 'image8.jpg', 'image9.jpg'],
-            titles: ['Bathroom', 'Garage', 'Backyard', 'Front Yard'],
-            descriptions: [
-                'A luxurious bathroom with a soaking tub.',
-                'A spacious garage for multiple vehicles.',
-                'A lush backyard perfect for relaxation.',
-                'A well-maintained front yard with flowers.'
-            ],
-            availability: 'Limited Stock',
-            price: '$600'
-        }
-    };
-
-    // Reusable listener function
-    function setupImagePreview() {
-        // Select all images with the class 'previewable'
-        $('.previewable').on('click', function() {
-            const prevIndex = $(this).data('previndex'); // Get the preview index
-            const data = carouselData[prevIndex]; // Fetch data using the preview index
-
-            if (!data) return; // If no data found for index, do nothing
-
-            // Generate carousel HTML
-            let carouselHtml = '';
-            data.images.forEach((image, index) => {
-                const imageUrl = basePath + image; // Construct full image URL
-                const title = data.titles[index] || 'Default Title'; // Use title from data or default
-                const description = data.descriptions[index] || 'Default description'; // Use description or default
-
-                carouselHtml += `
-                    <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                        <img class="rounded carousel-image w-full object-cover h-64" src="${imageUrl}" />
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>${title}</h5>
-                            <p>${description}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Create a SweetAlert2 popup with carousel and additional details
-            Swal.fire({
-                title: 'Details',
-                html: `
-                    <div class="relative bg-white rounded-lg shadow-lg max-w-3xl mx-auto">
-                        <!-- Carousel Section -->
-                        <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                ${carouselHtml}
-                            </div>
-                            <!-- Carousel Controls -->
-                            <button class="carousel-control-prev" type="button" data-target="#carouselExample" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-target="#carouselExample" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </button>
-                        </div>
-
-                        <!-- Overlay with Image Info -->
-                        <div class="overlay-content absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-white">
-                            <h2 class="text-xl font-semibold">${data.titles[0] || ''}</h2> <!-- Display first title as main -->
-                            <p>${data.descriptions[0] || ''}</p> <!-- Display first description as main -->
-                            <p>Availability: <span>${data.availability || ''}</span></p>
-                            <p>Price: <span>${data.price || ''}</span></p>
-                        </div>
-
-                        <!-- Zoom Section -->
-                        <div class="zoom-container mt-4 w-full h-64 overflow-hidden">
-                            <img src="${basePath + data.images[0]}" class="zoom-image w-full object-cover h-full transition-transform duration-300" />
-                        </div>
-                    </div>
-                `,
-                showCloseButton: true,
-                focusConfirm: false,
-                confirmButtonText: 'Close',
-                width: '800px', // Adjust the width for the carousel
-                didOpen: () => {
-                    // Zoom Effect
-                    $('.zoom-container').on('mousemove', function(e) {
-                        const zoomImage = $(this).find('.zoom-image');
-                        const offsetX = e.offsetX;
-                        const offsetY = e.offsetY;
-                        const width = $(this).width();
-                        const height = $(this).height();
-
-                        // Calculate zoom percentages
-                        const xPercent = (offsetX / width) * 100;
-                        const yPercent = (offsetY / height) * 100;
-
-                        zoomImage.css({
-                            transform: `scale(1.5)`,
-                            transformOrigin: `${xPercent}% ${yPercent}%`,
-                        });
-                    });
-
-                    $('.zoom-container').on('mouseleave', function() {
-                        $(this).find('.zoom-image').css({
-                            transform: `scale(1)`,
-                            transformOrigin: `center center`,
-                        });
-                    });
-                },
-            });
-        });
-    }
-
-    // Call the function to set up the listener
-    setupImagePreview();
-});
-
-
-*/
-
 
 
 
