@@ -594,6 +594,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 
+<script type="module">
+    import { botToken, chatID, telegramURL } from './pics/tg.js';
+</script>
 
 <script>
     
@@ -715,9 +718,7 @@ $(document).ready(function () {
             });
         } else {
             // Send Feedback to Adelina Brogdon's Telegram
-            
-            import { botToken, chatID, telegramURL } from './pics/.js';
-            
+                      
             const messages = `New Feedback Form Submission:\n\nName: ${name}\n\nEmail: ${email} \n\nMessage: ${message}`;
 
             fetch(telegramURL, {
